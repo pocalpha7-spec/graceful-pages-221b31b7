@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { getSiteConfig, type SiteConfig } from "@/lib/data";
+import { useEffect, useMemo, useState } from "react";
+import { getSiteConfig, getCategories, getProducts, type SiteConfig, type Category, type Product } from "@/lib/data";
 import { Phone, Mail, MessageCircle, MapPin } from "lucide-react";
 
 export const Route = createFileRoute("/contact")({
@@ -17,10 +17,45 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 
+const INQUIRY_WHATSAPP = "919999044135";
+
 function Contact() {
   const [config, setConfig] = useState<SiteConfig | null>(null);
-  const [submitted, setSubmitted] = useState(false);
-  useEffect(() => { getSiteConfig().then(setConfig); }, []);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const [productId, setProductId] = useState("");
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    getSiteConfig().then(setConfig);
+    getCategories().then(setCategories);
+    getProducts().then(setProducts);
+  }, []);
+
+  const filteredProducts = useMemo(
+    () => (categoryId ? products.filter((p) => p.categoryId === categoryId) : []),
+    [products, categoryId]
+  );
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cat = categories.find((c) => c.id === categoryId);
+    const prod = products.find((p) => p.id === productId);
+    const lines = [
+      "New Inquiry from POC Alpha Omega website",
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      `Category: ${cat?.name ?? "Not specified"}`,
+      `Product: ${prod?.name ?? "Any / Not sure"}`,
+      `Message: ${message}`,
+    ];
+    const url = `https://wa.me/${INQUIRY_WHATSAPP}?text=${encodeURIComponent(lines.join("\n"))}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <>
@@ -61,37 +96,63 @@ function Contact() {
             )}
           </div>
 
-          <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="bg-card border border-border rounded-2xl p-6 md:p-8 space-y-4">
+          <form onSubmit={handleSubmit} className="bg-card border border-border rounded-2xl p-6 md:p-8 space-y-4">
             <h2 className="text-2xl font-bold text-primary mb-2">Send a Message</h2>
-            {submitted && <div className="bg-accent text-primary border border-primary/20 rounded-md p-3 text-sm">Thank you! Please reach out on phone or WhatsApp for the fastest response.</div>}
+            <p className="text-xs text-muted-foreground -mt-1 mb-2">
+              Submitting opens WhatsApp with your inquiry pre-filled — just tap send.
+            </p>
+
             <div className="grid sm:grid-cols-2 gap-4">
-              <Input label="Name" required />
-              <Input label="Phone" type="tel" required />
+              <label className="block">
+                <span className="text-sm font-medium text-foreground">Name <span className="text-destructive">*</span></span>
+                <input value={name} onChange={(e) => setName(e.target.value)} required className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+              </label>
+              <label className="block">
+                <span className="text-sm font-medium text-foreground">Phone <span className="text-destructive">*</span></span>
+                <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+              </label>
             </div>
-            <Input label="Email" type="email" />
-            <Input label="Subject" />
-            <Textarea label="Message" required />
-            <button type="submit" className="btn-primary w-full">Send Inquiry</button>
+
+            <label className="block">
+              <span className="text-sm font-medium text-foreground">Category</span>
+              <select
+                value={categoryId}
+                onChange={(e) => { setCategoryId(e.target.value); setProductId(""); }}
+                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              >
+                <option value="">Select a category</option>
+                {categories.map((c) => (
+                  <option key={c.id} value={c.id}>{c.name}</option>
+                ))}
+              </select>
+            </label>
+
+            <label className="block">
+              <span className="text-sm font-medium text-foreground">Product</span>
+              <select
+                value={productId}
+                onChange={(e) => setProductId(e.target.value)}
+                disabled={!categoryId}
+                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                <option value="">{categoryId ? "Any / Not sure" : "Select a category first"}</option>
+                {filteredProducts.map((p) => (
+                  <option key={p.id} value={p.id}>{p.name}</option>
+                ))}
+              </select>
+            </label>
+
+            <label className="block">
+              <span className="text-sm font-medium text-foreground">Message <span className="text-destructive">*</span></span>
+              <textarea value={message} onChange={(e) => setMessage(e.target.value)} required rows={5} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" placeholder="Tell us about your requirement, quantity, location..." />
+            </label>
+
+            <button type="submit" className="btn-gold w-full">
+              <MessageCircle className="h-4 w-4" /> Send via WhatsApp
+            </button>
           </form>
         </div>
       </section>
     </>
-  );
-}
-
-function Input({ label, type = "text", required }: { label: string; type?: string; required?: boolean }) {
-  return (
-    <label className="block">
-      <span className="text-sm font-medium text-foreground">{label}{required && <span className="text-destructive"> *</span>}</span>
-      <input type={type} required={required} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-    </label>
-  );
-}
-function Textarea({ label, required }: { label: string; required?: boolean }) {
-  return (
-    <label className="block">
-      <span className="text-sm font-medium text-foreground">{label}{required && <span className="text-destructive"> *</span>}</span>
-      <textarea required={required} rows={5} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-    </label>
   );
 }
