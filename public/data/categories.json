@@ -1,0 +1,12 @@
+[
+  { "id": "pastor-shirts", "name": "Pastors / Clergy Shirts", "slug": "pastor-shirts", "description": "Comfortable, dignified clergy shirts for daily and Sunday ministry.", "image": "https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?auto=format&fit=crop&w=800&q=80" },
+  { "id": "pastor-ties", "name": "Pastor Ties", "slug": "pastor-ties", "description": "Elegant ties to complement clergy attire.", "image": "https://images.unsplash.com/photo-1589756823695-278bc923f962?auto=format&fit=crop&w=800&q=80" },
+  { "id": "pastor-gowns", "name": "Pastor Gowns", "slug": "pastor-gowns", "description": "Premium ministry gowns for worship and ceremonies.", "image": "https://images.unsplash.com/photo-1551732998-9573f695fdbb?auto=format&fit=crop&w=800&q=80" },
+  { "id": "wedding-gowns", "name": "Wedding Gowns", "slug": "wedding-gowns", "description": "Bridal gowns for Christian weddings.", "image": "https://images.unsplash.com/photo-1594552072238-5c4a26f10bfa?auto=format&fit=crop&w=800&q=80" },
+  { "id": "bible-covers", "name": "Bible Covers", "slug": "bible-covers", "description": "Protective and beautiful covers for your Bible.", "image": "https://images.unsplash.com/photo-1585241936937-7c66f8a8e5e9?auto=format&fit=crop&w=800&q=80" },
+  { "id": "bsi-bibles", "name": "BSI Bibles", "slug": "bsi-bibles", "description": "Authentic Bible Society of India editions across languages.", "image": "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=800&q=80" },
+  { "id": "pastor-stoles", "name": "Pastor Stoles", "slug": "pastor-stoles", "description": "Liturgical stoles for clergy.", "image": "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?auto=format&fit=crop&w=800&q=80" },
+  { "id": "wooden-crosses", "name": "Wooden Crosses", "slug": "wooden-crosses", "description": "Handcrafted wooden crosses for home and altar.", "image": "https://images.unsplash.com/photo-1508361727343-ca787442dcd7?auto=format&fit=crop&w=800&q=80" },
+  { "id": "key-rings", "name": "Key Rings", "slug": "key-rings", "description": "Christian key rings and small gifts.", "image": "https://images.unsplash.com/photo-1611348586804-61bf6c080437?auto=format&fit=crop&w=800&q=80" },
+  { "id": "other-church-items", "name": "Other Church Items", "slug": "other-church-items", "description": "Communion supplies, prayer cloths and more ministry essentials.", "image": "https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=800&q=80" }
+]

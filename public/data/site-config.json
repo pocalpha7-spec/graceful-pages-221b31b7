@@ -1,0 +1,28 @@
+{
+  "name": "POC Alpha Omega Christian Collection",
+  "shortName": "POC Alpha Omega",
+  "tagline": "Faith • Hope • Love – Serving the Body of Christ",
+  "description": "Trusted supplier of Christian products, church essentials, pastor accessories, ministry garments, Bibles, worship items and Christian gift articles across India.",
+  "phones": ["9451005232", "9889728815"],
+  "whatsapp": "919451005232",
+  "email": "info@pocalphaomega.in",
+  "address": "India",
+  "developer": {
+    "name": "UMID Infotech",
+    "url": "https://umidinfotech.in"
+  },
+  "social": {
+    "facebook": "#",
+    "instagram": "#",
+    "youtube": "#"
+  },
+  "whyChooseUs": [
+    { "title": "Quality Christian Products", "description": "Hand-picked, durable items crafted for ministry and worship." },
+    { "title": "Wholesale & Retail Supply", "description": "Flexible ordering for churches, stores, and individuals." },
+    { "title": "Church & Ministry Essentials", "description": "Everything your congregation needs in one place." },
+    { "title": "Affordable Pricing", "description": "Fair prices so ministries can serve without strain." },
+    { "title": "Bulk Order Facility", "description": "Special pricing and packaging for large orders." },
+    { "title": "All India Delivery", "description": "Reliable dispatch to every state across India." },
+    { "title": "Custom Orders Available", "description": "Personalized garments and accessories on request." }
+  ]
+}
