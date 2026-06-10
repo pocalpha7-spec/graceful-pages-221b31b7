@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WholesaleRouteImport } from './routes/wholesale'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ShippingRouteImport } from './routes/shipping'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -21,6 +22,11 @@ import { Route as CategorySlugRouteImport } from './routes/category.$slug'
 const WholesaleRoute = WholesaleRouteImport.update({
   id: '/wholesale',
   path: '/wholesale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShippingRoute = ShippingRouteImport.update({
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/products': typeof ProductsRoute
   '/shipping': typeof ShippingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wholesale': typeof WholesaleRoute
   '/category/$slug': typeof CategorySlugRoute
   '/product/$slug': typeof ProductSlugRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/products': typeof ProductsRoute
   '/shipping': typeof ShippingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wholesale': typeof WholesaleRoute
   '/category/$slug': typeof CategorySlugRoute
   '/product/$slug': typeof ProductSlugRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/products': typeof ProductsRoute
   '/shipping': typeof ShippingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wholesale': typeof WholesaleRoute
   '/category/$slug': typeof CategorySlugRoute
   '/product/$slug': typeof ProductSlugRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/products'
     | '/shipping'
+    | '/sitemap.xml'
     | '/wholesale'
     | '/category/$slug'
     | '/product/$slug'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/products'
     | '/shipping'
+    | '/sitemap.xml'
     | '/wholesale'
     | '/category/$slug'
     | '/product/$slug'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/products'
     | '/shipping'
+    | '/sitemap.xml'
     | '/wholesale'
     | '/category/$slug'
     | '/product/$slug'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ProductsRoute: typeof ProductsRoute
   ShippingRoute: typeof ShippingRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WholesaleRoute: typeof WholesaleRoute
   CategorySlugRoute: typeof CategorySlugRoute
   ProductSlugRoute: typeof ProductSlugRoute
@@ -141,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/wholesale'
       fullPath: '/wholesale'
       preLoaderRoute: typeof WholesaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shipping': {
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ProductsRoute: ProductsRoute,
   ShippingRoute: ShippingRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   WholesaleRoute: WholesaleRoute,
   CategorySlugRoute: CategorySlugRoute,
   ProductSlugRoute: ProductSlugRoute,
