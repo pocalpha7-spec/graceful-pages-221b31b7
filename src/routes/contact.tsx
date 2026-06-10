@@ -17,7 +17,7 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 
-const INQUIRY_WHATSAPP = "919999044135";
+const INQUIRY_WHATSAPP = "919451005232";
 
 function Contact() {
   const [config, setConfig] = useState<SiteConfig | null>(null);
