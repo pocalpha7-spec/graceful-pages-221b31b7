@@ -1,3 +1,7 @@
+// src/lib/data.ts
+
+import { loadSheet } from "./googleSheets";
+
 export interface SiteConfig {
   name: string;
   shortName: string;
@@ -54,14 +58,49 @@ export interface Testimonial {
 
 async function loadJson<T>(path: string): Promise<T> {
   const res = await fetch(path);
-  if (!res.ok) throw new Error(`Failed to load ${path}`);
+
+  if (!res.ok) {
+    throw new Error(`Failed to load ${path}`);
+  }
+
   return res.json() as Promise<T>;
 }
 
-export const getSiteConfig = () => loadJson<SiteConfig>("/data/site-config.json");
-export const getHeroSlides = () => loadJson<HeroSlide[]>("/data/hero-slides.json");
-export const getCategories = () => loadJson<Category[]>("/data/categories.json");
-export const getProducts = () => loadJson<Product[]>("/data/products.json");
-export const getTestimonials = () => loadJson<Testimonial[]>("/data/testimonials.json");
+// Still using JSON
+export const getSiteConfig = () =>
+  loadJson<SiteConfig>("/data/site-config.json");
 
-export const formatPrice = (n: number) => `₹${n.toLocaleString("en-IN")}`;
+export const getHeroSlides = () =>
+  loadJson<HeroSlide[]>("/data/hero-slides.json");
+
+export const getTestimonials = () =>
+  loadJson<Testimonial[]>("/data/testimonials.json");
+
+// Now using Google Sheets
+export const getCategories = async (): Promise<Category[]> => {
+  return await loadSheet<Category>("Categories");
+};
+
+export const getProducts = async (): Promise<Product[]> => {
+  const data = await loadSheet<any>("Products");
+
+  return data.map((item) => ({
+    ...item,
+
+    // Convert string -> number
+    price: Number(item.price),
+
+    // Convert comma-separated string -> array
+    gallery: item.gallery
+      ? item.gallery.split(",").map((x: string) => x.trim())
+      : [],
+
+    // Convert comma-separated string -> array
+    features: item.features
+      ? item.features.split(",").map((x: string) => x.trim())
+      : [],
+  }));
+};
+
+export const formatPrice = (n: number) =>
+  `₹${n.toLocaleString("en-IN")}`;
