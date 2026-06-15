@@ -40,7 +40,7 @@ function Home() {
       {/* Welcome */}
       <section className="py-16 md:py-20 bg-background">
         <div className="container-px mx-auto max-w-5xl text-center">
-          <p className="text-gold uppercase tracking-widest text-xs font-semibold mb-3">Welcome to POC Alpha Omega</p>
+          <p className="text-gold uppercase tracking-widest text-xs font-semibold mb-3">Welcome to POC ALPHA OMEGA CHRISTIAN PRODUCT</p>
           <h2 className="text-3xl md:text-5xl font-bold text-primary mb-4">Serving the Body of Christ Across India</h2>
           <p className="text-muted-foreground max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
             We are a trusted supplier of Christian products, church essentials, pastor accessories, ministry garments, Bibles, worship items and Christian gift articles — delivered to churches, ministries and believers nationwide.
