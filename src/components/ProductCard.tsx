@@ -1,3 +1,4 @@
+//src/components/ProductCard.tsx
 import { Link } from "@tanstack/react-router";
 import { formatPrice, type Product } from "@/lib/data";
 
@@ -11,8 +12,8 @@ export function ProductCard({ product }: { product: Product }) {
     >
       <div className="aspect-square overflow-hidden bg-accent">
         <img
-          // src={product.image}
-          src="https://drive.google.com/thumbnail?id=1fwV-hHW4owSh2dW_m0EUF0S4aO9IBf1s&sz=w1000"
+          src={product.image}
+          // src="https://drive.google.com/thumbnail?id=1fwV-hHW4owSh2dW_m0EUF0S4aO9IBf1s&sz=w1000"
           alt={product.name}
           loading="lazy"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import logoAsset from "@/assets/poc-logo.asset.json";
+
 import { getCategories, type Category } from "@/lib/data";
 import { Menu, X, ChevronDown } from "lucide-react";
 
@@ -20,7 +20,7 @@ export function Header() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  console.log("logoAsset", logoAsset);
+ 
 
   return (
     <header

@@ -1,3 +1,4 @@
+//src/routes/index.tsx
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { HeroSlider } from "@/components/HeroSlider";

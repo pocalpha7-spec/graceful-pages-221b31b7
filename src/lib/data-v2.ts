@@ -82,33 +82,17 @@ export const getProducts = async (): Promise<Product[]> => {
   const data = await loadSheet<any>("Form-response");
 
   return data.map((item) => ({
-    id: item["id"] ?? "",
-    categoryId: item["categoryId"] ?? "",
+    ...item,
 
-    // CSV has no "name" column — use Category as the display name
-    name: item["Category"] ?? "",
+    // Convert string -> number
+    price: Number(item.price),
 
-    // CSV slug column
-    slug: item["Slug"] ?? "",
+    // Convert comma-separated string -> array
+    gallery: item.gallery ? item.gallery.split(",").map((x: string) => x.trim()) : [],
 
-    // Price may be empty in CSV — default to 0
-    price: item["price"] ? Number(item["price"]) : 0,
-
-    shortDescription: item["shortDescription"] ?? "",
-    description: item["description"] ?? "",
-
-    // "Images" column has the embeddable Google Drive thumbnail URL
-    image: item["Images"] ?? "",
-
-    // gallery is a comma-separated list
-    gallery: item["gallery"] ? item["gallery"].split(",").map((x: string) => x.trim()) : [],
-
-    // features is a comma-separated list
-    features: item["features"] ? item["features"].split(",").map((x: string) => x.trim()) : [],
-
-    availability: item["availability"] ?? "",
+    // Convert comma-separated string -> array
+    features: item.features ? item.features.split(",").map((x: string) => x.trim()) : [],
   }));
 };
 
-export const formatPrice = (n: number) =>
-  n > 0 ? `₹${n.toLocaleString("en-IN")}` : "Contact for Price";
+export const formatPrice = (n: number) => `₹${n.toLocaleString("en-IN")}`;

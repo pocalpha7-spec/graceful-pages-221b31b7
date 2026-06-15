@@ -2,26 +2,27 @@
 
 import Papa from "papaparse";
 
-// Extracted from your published Google Sheet URL
+/**
+ * Google Sheets Published ID
+ *
+ * Published URL:
+ * https://docs.google.com/spreadsheets/d/e/2PACX-1vQdFdnfsRbSk9kOBMbv6BE0R05bkVnOfWhY7zQRQAU61gQTWPnylvFdP4g6qAlVEFrEuOs_Jro0n8Km/pubhtml
+ */
 const SHEET_ID =
-  "2PACX-1vREzwjP-RNLKUPRhiEGBp9PKN7r1OV1wkG2rW-N9-hzunQnvwXU4xIJ_-mpKxtXrAKbRZS1Ix6lKnON";
+  "2PACX-1vQdFdnfsRbSk9kOBMbv6BE0R05bkVnOfWhY7zQRQAU61gQTWPnylvFdP4g6qAlVEFrEuOs_Jro0n8Km";
 
 /**
- * Load any sheet/tab from Google Sheets
- *
- * Example:
- * loadSheet("Products")
- * loadSheet("Categories")
+ * Load data from a specific Google Sheet tab.
  */
 export async function loadSheet<T>(sheetName: string): Promise<T[]> {
-  const url = `https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/pub?output=csv&gid=${await getSheetGid(
-    sheetName
-  )}`;
+  const gid = getSheetGid(sheetName);
+
+  const url = `https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/pub?output=csv&gid=${gid}`;
 
   const response = await fetch(url);
 
   if (!response.ok) {
-    throw new Error(`Failed to load sheet: ${sheetName}`);
+    throw new Error(`Failed to load sheet "${sheetName}"`);
   }
 
   const csv = await response.text();
@@ -35,17 +36,15 @@ export async function loadSheet<T>(sheetName: string): Promise<T[]> {
 }
 
 /**
- * Map sheet names to their gid values.
+ * Sheet tab name → gid mapping
  *
- * Open each tab in Google Sheets and copy its gid from the URL:
- *
- * Example:
- * https://docs.google.com/.../edit#gid=123456789
+ * Get gid from:
+ * Google Sheet → Open Tab → URL contains #gid=XXXXXXXX
  */
-async function getSheetGid(sheetName: string): Promise<string> {
+function getSheetGid(sheetName: string): string {
   const gids: Record<string, string> = {
-    Products: "300290042",
-    Categories: "0",
+    Categories: "1919624571",
+    "Form-response": "104020349",
   };
 
   const gid = gids[sheetName];
