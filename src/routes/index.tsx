@@ -160,7 +160,7 @@ function Home() {
           {[
             { icon: Truck, title: "All India Delivery", text: "Reliable nationwide dispatch" },
             { icon: ShieldCheck, title: "Authentic Products", text: "Genuine BSI Bibles & quality garments" },
-            { icon: Phone, title: "Direct Support", text: "Call 9451005232 / 9889728815" },
+            { icon: Phone, title: "Direct Support", text: "Call 9453242594 / 9935473777" },
           ].map((b) => (
             <div key={b.title} className="flex items-center gap-4 justify-center">
               <div className="h-12 w-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center shrink-0">
