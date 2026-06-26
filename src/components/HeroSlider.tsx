@@ -28,7 +28,7 @@ export function HeroSlider() {
           <img
             src={image}
             alt={`Banner ${i + 1}`}
-            className="w-full h-full object-contain bg-black"
+            className="w-full h-full object-cover"
             loading={i === 0 ? "eager" : "lazy"}
           />
         </div>
