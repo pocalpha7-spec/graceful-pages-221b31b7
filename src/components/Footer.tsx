@@ -69,6 +69,16 @@ export function Footer() {
                 Contact Us
               </Link>
             </li>
+            <li>
+              <a
+                href="https://www.pocdiocese.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-gold"
+              >
+                Know More
+              </a>
+            </li>
           </ul>
         </div>
 
